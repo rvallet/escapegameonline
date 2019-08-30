@@ -3,6 +3,7 @@ package game;
 public class LaunchGame {
 
     public static void main(String[] args) {
+        System.out.println("*** from Main class LaunchGame *** ");
         start();
     }
 

@@ -8,4 +8,10 @@ package game;
  * @author Rémy VALLET
  */
 public class ChallengerMode {
+    private String secretNum;
+    private int tentativeNum;
+
+    public String generateSecretNum (int nbDigit) {
+    return null;
+    }
 }

@@ -8,9 +8,14 @@ public class LaunchGame {
         System.out.println("*** from Main class LaunchGame *** ");
         start();
         PropertiesReader pr = new PropertiesReader();
-        System.out.println(pr.getProp("settings.nbDigit"));
-        System.out.println(pr.getProp("settings.nbTries"));
-        System.out.println(Boolean.getBoolean(pr.getProp("settings.devMode")));
+        System.out.println(pr.getIntProp("settings.nbDigit"));
+        System.out.println(pr.getIntProp("settings.nbTries"));
+        System.out.println(pr.getBoolProp("settings.devMode"));
+
+        System.out.println("*** from Lauching ChallengerMode *** ");
+        ChallengerMode CMgame = new ChallengerMode(pr.getIntProp("settings.nbDigit"), pr.getIntProp("settings.nbTries"), pr.getBoolProp("settings.devMode"));
+        System.out.println(CMgame.generateSecretNum());
+
     }
 
     public static void start(){

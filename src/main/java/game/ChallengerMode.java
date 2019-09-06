@@ -1,4 +1,6 @@
 package main.java.game;
+import main.java.utils.PropertiesReader;
+import main.java.utils.RanChoice;
 
 /**
  * Search for an X number combination in Challenger mode :
@@ -8,10 +10,52 @@ package main.java.game;
  * @author Rémy VALLET
  */
 public class ChallengerMode {
-    private String secretNum;
-    private int tentativeNum;
 
-    public String generateSecretNum (int nbDigit) {
-    return null;
+    /* Game settings variable */
+    private int nbDigit;
+    private int nbTries;
+    private Boolean devMode;
+
+    /* Class variable */
+    private String secretNum;
+    private int tentativeNum=0;
+    private int min=0;
+    private int max=9;
+
+    /* Tools :  PropertiesReader */
+    PropertiesReader pr = new PropertiesReader();
+
+    /* Class constructor */
+    public ChallengerMode(int nbDigit, int nbTries, Boolean devMode) {
+        this.nbDigit = nbDigit;
+        this.nbTries = nbTries;
+        this.devMode = devMode;
+    }
+
+    public String generateSecretNum () {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<this.nbDigit; i++){
+            sb.append(RanChoice.ranChoice(this.min, this.max));
+        }
+        setSecretNum(sb.toString());
+        setTentativeNum(getTentativeNum()+1);
+    return sb.toString();
+    }
+
+    /* Getter and Setter */
+    public String getSecretNum() {
+        return secretNum;
+    }
+
+    public void setSecretNum(String secretNum) {
+        this.secretNum = secretNum;
+    }
+
+    public int getTentativeNum() {
+        return tentativeNum;
+    }
+
+    public void setTentativeNum(int tentativeNum) {
+        this.tentativeNum = tentativeNum;
     }
 }

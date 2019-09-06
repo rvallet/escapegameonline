@@ -28,4 +28,12 @@ public class PropertiesReader {
         }
         return result;
     }
+
+    public int getIntProp (String propName) {
+        return Integer.parseInt(getProp(propName));
+    }
+
+    public Boolean getBoolProp (String propName) {
+        return Boolean.getBoolean(getProp(propName));
+    }
 }

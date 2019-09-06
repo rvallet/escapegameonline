@@ -1,3 +1,4 @@
+import main.java.utils.ScannerTools;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,14 +8,10 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import utils.ScannerTools;
-import utils.RanChoice;
-import utils.TextAnimation;
-import utils.ComputeTools;
 
 
 public class UtilsTest {
-    int scannerTest = ScannerTools.readInt();
+        int scannerTest = ScannerTools.readInt();
 /*    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach

@@ -1,4 +1,4 @@
-package utils;
+package main.java.utils;
 
 /**
  * Utility class for animation and text decoration in the console

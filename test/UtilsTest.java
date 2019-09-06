@@ -1,4 +1,4 @@
-import main.java.utils.ScannerTools;
+import main.java.utils.RanChoice;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class UtilsTest {
-        int scannerTest = ScannerTools.readInt();
-/*    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUpStreams() {
@@ -22,25 +22,23 @@ public class UtilsTest {
     @AfterEach
     public void restoreStreams() {
         System.setOut(System.out);
-    }*/
+    }
 
     @Test
     public void testRanChoice(){
         boolean result = true;
-        int nbTest = 10;
+        int nbTest = 100;
         //TODO: implement properties for mix/max
         int min = 0;
         int max = 9;
 
-  /*      while(result) {
-            for (int i = 0; i < nbTest; i++) {
-                int ranResult = RanChoice.ranChoice(min, max);
-                if (ranResult > max || ranResult < min) {
-                    result = false;
-                    i=nbTest;
-                }
+        for (int i = 0; i < nbTest; i++) {
+            int ranResult = RanChoice.ranChoice(min, max);
+            if (ranResult > max || ranResult < min) {
+                result = false;
+                i=nbTest;
             }
-        }*/
+        }
         assertTrue(result);
     }
 }

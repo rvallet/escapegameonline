@@ -12,8 +12,8 @@ public class LaunchGame {
         start();
 
         System.out.println("*** from Lauching ChallengerMode *** ");
-        ChallengerMode cmGame = new ChallengerMode();
-        System.out.println(cmGame.generateSecretNum());
+        /*ChallengerMode cmGame = new ChallengerMode();
+        System.out.println(cmGame.generateSecretNum());*/
  /*       System.err.println("Tentative : "+cmGame.getTentativeNum());
         System.out.println(cmGame.getMinArr());
         System.out.println(cmGame.getMaxArr());
@@ -45,10 +45,19 @@ public class LaunchGame {
         System.out.println(pr.getContent("content.msg1.mode2"));
         System.out.println(pr.getContent("content.msg1.mode3"));
         System.out.println(pr.getContent("content.msg1.deco0"));
-        System.out.print("> ");
+        System.out.print("Human> ");
         switch(ScannerTools.readLine()){
             case "1":
-                System.out.println("1");
+                System.out.println("Choix n°1 : Mode challenger");
+                ChallengerMode cmGame = new ChallengerMode();
+                System.out.print("Enigma> Je propose le code ");
+                System.err.println(cmGame.generateSecretNum());
+                System.out.println("Enigma> Quel est votre réponse ?");
+                System.out.println(" *** Tentative n°"+cmGame.getTentativeNum()+" sur "+pr.getProp("settings.nbTries")+" ***");
+                System.out.print("Human > ");
+                cmGame.adjustMinMax(ScannerTools.readLine());
+                System.out.print("Enigma> Je propose le code ");
+                System.out.println(cmGame.generateSecretNum());
                 break;
             case"2":
                 System.out.println("2");

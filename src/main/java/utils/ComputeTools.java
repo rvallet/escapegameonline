@@ -1,9 +1,12 @@
 package main.java.utils;
 
+import java.util.ArrayList;
+
 /**
  * @author Rémy VALLET
  */
 public class ComputeTools {
+
 
     //TODO: Delete this foolish main
     public static void main(String[] args) {

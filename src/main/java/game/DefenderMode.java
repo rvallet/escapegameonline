@@ -1,4 +1,4 @@
-package game;
+package main.java.game;
 
 /**
  * Search for an X number combination in Defender mode :

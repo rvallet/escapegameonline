@@ -1,6 +1,7 @@
 package main.java.game;
 import main.java.utils.PropertiesReader;
 import main.java.utils.RanChoice;
+import main.java.utils.ScannerTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ChallengerMode {
     private Boolean devMode;
 
     /* Class variable */
+    private String name;
     private String secretNum;
     private int attemptsNum;
     private List<Integer> minArr=new ArrayList<>();
@@ -33,6 +35,7 @@ public class ChallengerMode {
 
     /* Class constructor */
     public ChallengerMode() {
+        this.name = "Challenger Mode";
         this.nbDigit = pr.getIntProp("settings.nbDigit");
         this.nbTries = pr.getIntProp("settings.nbTries");
         this.devMode = pr.getBoolProp("settings.devMode");
@@ -88,7 +91,25 @@ public class ChallengerMode {
 
     /* RUN */
     public void run(){
-
+        System.out.println("Choix n°1 : Mode challenger");
+        ChallengerMode cmGame = new ChallengerMode();
+        while(!cmGame.getNumFound() && !cmGame.getReachMaxAttempts() && cmGame.getPlayAgain()) {
+            System.out.print("Enigma> Je propose le code ");
+            System.out.println(cmGame.generateSecretNum());
+            System.out.println("Enigma> Quel est votre réponse ?");
+            System.out.println(" *** Tentative n°" + cmGame.getAttemptsNum() + " sur " + pr.getProp("settings.nbTries") + " ***");
+            System.out.print("Human > ");
+            if (cmGame.getAttemptsNum() == Integer.parseInt(pr.getProp("settings.nbTries"))) {
+                cmGame.setReachMaxAttempts(true);
+            }
+            String humanAnswer = ScannerTools.readLine();
+            cmGame.checkHumanAnswer(humanAnswer);
+            if (!cmGame.getNumFound()) {
+                cmGame.adjustMinMax(humanAnswer);
+            } else {
+                System.out.println("La combinaison étais donc "+cmGame.getSecretNum()+" (trouvé en "+cmGame.getAttemptsNum()+" tentatives)");
+            }
+        }
     }
 
     /* Getter and Setter */

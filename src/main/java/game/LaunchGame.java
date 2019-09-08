@@ -45,19 +45,31 @@ public class LaunchGame {
         System.out.println(pr.getContent("content.msg1.mode2"));
         System.out.println(pr.getContent("content.msg1.mode3"));
         System.out.println(pr.getContent("content.msg1.deco0"));
+
+
+
         System.out.print("Human> ");
         switch(ScannerTools.readLine()){
             case "1":
                 System.out.println("Choix n°1 : Mode challenger");
                 ChallengerMode cmGame = new ChallengerMode();
-                System.out.print("Enigma> Je propose le code ");
-                System.err.println(cmGame.generateSecretNum());
-                System.out.println("Enigma> Quel est votre réponse ?");
-                System.out.println(" *** Tentative n°"+cmGame.getTentativeNum()+" sur "+pr.getProp("settings.nbTries")+" ***");
-                System.out.print("Human > ");
-                cmGame.adjustMinMax(ScannerTools.readLine());
-                System.out.print("Enigma> Je propose le code ");
-                System.out.println(cmGame.generateSecretNum());
+                while(!cmGame.getNumFound() && !cmGame.getReachMaxAttempts() && cmGame.getPlayAgain()) {
+                    System.out.print("Enigma> Je propose le code ");
+                    System.out.println(cmGame.generateSecretNum());
+                    System.out.println("Enigma> Quel est votre réponse ?");
+                    System.out.println(" *** Tentative n°" + cmGame.getAttemptsNum() + " sur " + pr.getProp("settings.nbTries") + " ***");
+                    System.out.print("Human > ");
+                    if (cmGame.getAttemptsNum() == Integer.parseInt(pr.getProp("settings.nbTries"))) {
+                        cmGame.setReachMaxAttempts(true);
+                    }
+                    String humanAnswer = ScannerTools.readLine();
+                    cmGame.checkHumanAnswer(humanAnswer);
+                    if (!cmGame.getNumFound()) {
+                        cmGame.adjustMinMax(humanAnswer);
+                    } else {
+                        System.out.println("La combinaison étais donc "+cmGame.getSecretNum()+" (trouvé en "+cmGame.getAttemptsNum()+" tentatives)");
+                    }
+                }
                 break;
             case"2":
                 System.out.println("2");
@@ -69,5 +81,13 @@ public class LaunchGame {
                 //Todo : log4j
                 System.err.println("Vous devez entrer un choix parmis ceux proposés (chiffre : 1, 2 ou 3)");
         };
+        System.out.println("******************    Menu     ********************************");
+        System.out.println("1 - Rejouer une partie en "+"NomDuModeEnCours"+" ? (taper '1')");
+        System.out.println("2 - Choisir un autre mode de jeu ?                 (entrer '2')");
+        System.out.println("3 - Quitter l'application ?                        (entrer '3')");
+        System.out.println("***************************************************************");
+        System.out.println(" ");
+        System.out.print("Human > ");
+        String choice = ScannerTools.readLine();
     }
 }

@@ -32,17 +32,20 @@ public class GameCommonContent {
         System.out.print("Human> ");
         switch (ScannerTools.readLine()) {
             case "1":
+                playAgain=false;
                 do {
                     new ChallengerMode().run();
                     GameCommonContent.gameEndMenu();
                 } while (playAgain);
                 break;
             case "2":
-                playAgain=true;
-                System.out.println("2");
+                playAgain=false;
+                do {
+                    System.out.println("2");
+                } while (playAgain);
                 break;
             case "3":
-                playAgain=true;
+                playAgain=false;
                 System.out.println("3");
                 break;
             default:
@@ -61,16 +64,16 @@ public class GameCommonContent {
         String choice = ScannerTools.readLine();
         switch (choice) {
             case "1":
-                System.out.println("Choix n°1 : Nouvelle partie");
+                System.out.println("*** Nouvelle partie ***");
                 playAgain=true;
                 break;
             case "2":
-                System.out.println("Choix n°2 : Retour au menu");
+                System.out.println("*** Retour au menu ***");
                 playAgain=false;
                 gameStartMenu();
                 break;
             case "3":
-                System.out.println("Choix n°3 : Quitter le programme");
+                System.out.println("*** Quitter le programme ***");
                 playAgain=false;
                 break;
             default:

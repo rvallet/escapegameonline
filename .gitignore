@@ -17,3 +17,7 @@ escape-game-online.iml
 
 # Eclipse
 /.settings/
+.classpath
+.project
+bin/
+

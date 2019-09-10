@@ -91,14 +91,14 @@ public class ChallengerMode {
 
     /* RUN */
     public void run(){
-        System.out.println("Choix n°1 : Mode challenger");
+        System.out.println(pr.getContent("content.cm.msg1"));
         ChallengerMode cmGame = new ChallengerMode();
         while(!cmGame.getNumFound() && !cmGame.getReachMaxAttempts() && cmGame.getPlayAgain()) {
-            System.out.print("Enigma> Je propose le code ");
+            System.out.print(pr.getContent("content.cm.msg2"));
             System.out.println(cmGame.generateSecretNum());
-            System.out.println("Enigma> Quel est votre réponse ?");
-            System.out.println(" *** Tentative n°" + cmGame.getAttemptsNum() + " sur " + pr.getProp("settings.nbTries") + " ***");
-            System.out.print("Human > ");
+            System.out.println(pr.getContent("content.cm.msg3"));
+            System.out.println(pr.getContent("content.cm.msg4.1") + cmGame.getAttemptsNum() + " "+ pr.getContent("content.cm.msg4.2") + pr.getProp("settings.nbTries") + " "+pr.getContent("content.cm.msg4.3"));
+            System.out.print(pr.getContent("content.cm.msg5"));
             if (cmGame.getAttemptsNum() == Integer.parseInt(pr.getProp("settings.nbTries"))) {
                 cmGame.setReachMaxAttempts(true);
             }
@@ -106,8 +106,11 @@ public class ChallengerMode {
             cmGame.checkHumanAnswer(humanAnswer);
             if (!cmGame.getNumFound()) {
                 cmGame.adjustMinMax(humanAnswer);
+                if (cmGame.getReachMaxAttempts()) {
+                    System.out.println(pr.getContent("content.cm.msg7"));
+                }
             } else {
-                System.out.println("La combinaison étais donc "+cmGame.getSecretNum()+" (trouvé en "+cmGame.getAttemptsNum()+" tentatives)");
+                System.out.println(pr.getContent("content.cm.msg6.1")+cmGame.getSecretNum()+" "+pr.getContent("content.cm.msg6.2")+cmGame.getAttemptsNum()+" "+pr.getContent("content.cm.msg6.3"));
             }
         }
     }

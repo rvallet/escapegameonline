@@ -12,7 +12,17 @@ public abstract class ScannerTools {
      * @author Rémy VALLET
      * @return int -->
      */
-    public static int readInt() {
+    public static int readInt(int maxInt) {
+        while (!sc.hasNextInt()) {
+            System.out.println("Vous devez entrer un choix valide (chiffre entre 1 et "+maxInt+")");
+            System.out.print("Human > ");
+            sc.next();
+        }
+        while (sc.nextInt() > maxInt){
+            System.out.println("Vous devez entrer un choix valide (chiffre entre 1 et "+maxInt+")");
+            System.out.print("Human > ");
+            sc.next();
+        }
         return sc.nextInt();
     }
 
@@ -31,9 +41,4 @@ public abstract class ScannerTools {
         public static String readLine() {
             return sc.nextLine();
         }
-
-    //TODO: Delete this foolish main
-    public static void main(String[] args) {
-        System.out.println("*** tests from ScannerTools***");
-    }
 }

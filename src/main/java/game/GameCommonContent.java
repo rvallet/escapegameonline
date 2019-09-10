@@ -61,20 +61,21 @@ public class GameCommonContent {
         System.out.println("**************************************************");
         System.out.println(" ");
         System.out.print("Human > ");
-        String choice = ScannerTools.readLine();
+        int choice = ScannerTools.readInt(3);
         switch (choice) {
-            case "1":
+            case 1:
                 System.out.println("*** Nouvelle partie ***");
                 playAgain=true;
                 break;
-            case "2":
+            case 2:
                 System.out.println("*** Retour au menu ***");
                 playAgain=false;
                 gameStartMenu();
                 break;
-            case "3":
+            case 3:
                 System.out.println("*** Quitter le programme ***");
                 playAgain=false;
+                System.exit(0);
                 break;
             default:
                 System.out.println("Vous devez faire un choix parmis ceux proposés");

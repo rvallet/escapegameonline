@@ -98,11 +98,16 @@ public class ChallengerMode {
             System.out.println(cmGame.generateSecretNum());
             System.out.println(pr.getContent("content.cm.msg3"));
             System.out.println(pr.getContent("content.cm.msg4.1") + cmGame.getAttemptsNum() + " "+ pr.getContent("content.cm.msg4.2") + pr.getProp("settings.nbTries") + " "+pr.getContent("content.cm.msg4.3"));
-            System.out.print(pr.getContent("content.cm.msg5"));
+
             if (cmGame.getAttemptsNum() == Integer.parseInt(pr.getProp("settings.nbTries"))) {
                 cmGame.setReachMaxAttempts(true);
             }
-            String humanAnswer = ScannerTools.readLine();
+            String humanAnswer;
+            do {
+                System.out.print(pr.getContent("content.cm.msg5"));
+                humanAnswer = ScannerTools.readLine();
+            } while (!ScannerTools.isValidAnswer(humanAnswer));
+
             cmGame.checkHumanAnswer(humanAnswer);
             if (!cmGame.getNumFound()) {
                 cmGame.adjustMinMax(humanAnswer);

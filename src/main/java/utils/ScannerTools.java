@@ -10,6 +10,14 @@ public abstract class ScannerTools {
 
     /**
      * @author Rémy VALLET
+     * @return String --> the entire line entered by the user
+     */
+    public static String readLine() {
+        return sc.nextLine();
+    }
+
+    /**
+     * @author Rémy VALLET
      * @return int -->
      */
     public static int readInt(int maxInt) {
@@ -27,18 +35,12 @@ public abstract class ScannerTools {
     }
 
     /**
+     * Check if the user has entered the correct string length
+     * and contains only the signs '+','-', '='.
      * @author Rémy VALLET
-     * @return String --> the first word entered by the user
+     * @return Boolean -->
      */
-        public static String readWord() {
-            return sc.next();
-        }
-
-    /**
-     * @author Rémy VALLET
-     * @return String --> the entire line entered by the user
-     */
-        public static String readLine() {
-            return sc.nextLine();
-        }
+    public static Boolean isValidAnswer (String userInput) {
+        return userInput.length()== new PropertiesReader().getIntProp("settings.nbDigit") ? userInput.matches("[-=+]*") : false;
+    }
 }

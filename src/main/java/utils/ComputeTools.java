@@ -17,5 +17,6 @@ public class ComputeTools {
         logger.debug("Debug Message Logged !!!");
         logger.info("Info Message Logged !!!");
         logger.error("Error Message Logged !!!", new NullPointerException("NullError"));
+        System.out.println(ScannerTools.isValidAnswer("= fds ff ds =+="));
     }
 }

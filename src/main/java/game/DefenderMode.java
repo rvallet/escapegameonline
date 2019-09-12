@@ -8,4 +8,5 @@ package main.java.game;
  * @author Rémy VALLET
  */
 public class DefenderMode {
+
 }

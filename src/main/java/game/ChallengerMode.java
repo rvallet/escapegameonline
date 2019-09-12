@@ -16,19 +16,19 @@ import java.util.List;
 public class ChallengerMode {
 
     /* Game settings variable */
-    private int nbDigit;
-    private int nbTries;
-    private Boolean devMode;
+    private int nbDigit; //The number of digit from properties settings
+    private int nbTries; //The limited number of tries to found number
+    private Boolean devMode; //The dev mode from properties settings (useless on this mode)
 
     /* Class variable */
-    private String name;
-    private String secretNum;
-    private int attemptsNum;
-    private List<Integer> minArr=new ArrayList<>();
-    private List<Integer> maxArr=new ArrayList<>();
-    private Boolean numFound;
-    private Boolean reachMaxAttempts;
-    private Boolean playAgain;
+    private String name; //The name of the game mode to display
+    private String secretNum; //the secret number we attempts to found
+    private int attemptsNum; //the actual number of tries
+    private List<Integer> minArr=new ArrayList<>(); //the min array adjusted with the human player answer
+    private List<Integer> maxArr=new ArrayList<>(); //the max array adjusted with the human player answer
+    private Boolean numFound; //is the number is found ?
+    private Boolean reachMaxAttempts; //is the max attempts reached ?
+    private Boolean playAgain; //is the human player want to play again this mode ?
 
     /* Tools :  PropertiesReader */
     static PropertiesReader pr = new PropertiesReader();
@@ -49,6 +49,11 @@ public class ChallengerMode {
         this.playAgain = true;
     }
 
+    /**
+     * Method to generate a random number in order to found the secret number
+     * @author: Rémy VALLET
+     * @return String of the number to found
+     */
     public String generateSecretNum () {
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<this.nbDigit; i++){
@@ -59,6 +64,11 @@ public class ChallengerMode {
     return sb.toString();
     }
 
+    /**
+     * Method to adjust the min and max Arrays with the human player answer
+     * @author: Rémy VALLET
+     * @param userInput The string of operators '+,-,=' contained in the human player answer
+     */
     public void adjustMinMax (String userInput) {
         for (int i=0; i<userInput.length(); i++) {
             char temp = userInput.charAt(i);
@@ -79,6 +89,12 @@ public class ChallengerMode {
         }
     }
 
+    /**
+     * A method to set victory if the human player answer contains only '=' operator
+     *
+     * @author: Rémy VALLET
+     * @param userInput The string of operators '+,-,=' contained in the human player answer
+     */
     public void checkHumanAnswer (String userInput){
         StringBuilder sbTemp = new StringBuilder();
         for (int i=0; i<pr.getIntProp("settings.nbDigit"); i++) {
@@ -175,5 +191,4 @@ public class ChallengerMode {
     public void setPlayAgain(Boolean playAgain) {
         this.playAgain = playAgain;
     }
-
 }

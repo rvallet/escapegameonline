@@ -76,6 +76,7 @@ public class ChallengerMode {
     public void adjustMinMax (String userInput) {
         for (int i=0; i<userInput.length(); i++) {
             char temp = userInput.charAt(i);
+            //Todo : add logger if sign '+' or '-' out of range (arrays min/max) or secure this input
             switch (temp) {
                 case '+':
                     this.minArr.set(i, Integer.parseInt(String.valueOf(getSecretNum().charAt(i)))+1);

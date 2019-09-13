@@ -60,7 +60,10 @@ public class GameCommonContent {
                 case "3":
                     playAgain = false;
                     isValidChoice=true;
-                    System.out.println("3");
+                    do {
+                        new DuelMode().run();
+                        GameCommonContent.gameEndMenu();
+                    } while (playAgain);
                     break;
                 default:
                     isValidChoice=false;

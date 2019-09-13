@@ -3,6 +3,7 @@ package main.java.utils;
 import java.util.Random;
 
 /**
+ * This Class contains methods to easily generate a Random with parameters
  * @author Rémy VALLET
  */
 public abstract class RanChoice {

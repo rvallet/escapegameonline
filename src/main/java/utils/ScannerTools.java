@@ -16,6 +16,7 @@ public abstract class ScannerTools {
         return sc.nextLine();
     }
 
+    /* Unused reader because sc.next seems to saturate memory when user submit many wrong input */
     /**
      * @author Rémy VALLET
      * @return int -->
@@ -36,11 +37,21 @@ public abstract class ScannerTools {
 
     /**
      * Check if the user has entered the correct string length
-     * and contains only the signs '+','-', '='.
+     * and contains only the signs '+','-', '=' in Challenger Mode.
      * @author Rémy VALLET
-     * @return Boolean -->
+     * @return Boolean --> true if contains only '+','-','+' with the correct length.
      */
-    public static Boolean isValidAnswer (String userInput) {
+    public static Boolean isValidAnswerOperatorsSign(String userInput) {
         return userInput.length()== new PropertiesReader().getIntProp("settings.nbDigit") ? userInput.matches("[-=+]*") : false;
+    }
+
+    /**
+     * Check if the user has entered the correct string length
+     * and contains only digits from 0 to 9 in Defender Mode.
+     * @author Rémy VALLET
+     * @return Boolean --> true if contains only digit from 0 to 9 with the correct length.
+     */
+    public static Boolean isValidAnswerDigits (String userInput) {
+        return userInput.length()== new PropertiesReader().getIntProp("settings.nbDigit") ? userInput.matches("[0-9]*") : false;
     }
 }

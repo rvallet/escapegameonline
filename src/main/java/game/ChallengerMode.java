@@ -14,6 +14,7 @@ import java.util.List;
  * @author Rémy VALLET
  */
 public class ChallengerMode {
+    //Todo: put commons variables in parent class and extends this one with a super() constructor
 
     /* Game settings variable */
     private int nbDigit; //The number of digit from properties settings
@@ -30,11 +31,12 @@ public class ChallengerMode {
     private Boolean reachMaxAttempts; //is the max attempts reached ?
     private Boolean playAgain; //is the human player want to play again this mode ?
 
-    /* Tools :  PropertiesReader */
-    static PropertiesReader pr = new PropertiesReader();
+    /* Tools */
+    static PropertiesReader pr = new PropertiesReader(); //instance of PropertiesReader (easiest reading type : String, Int & Boolean)
 
     /* Class constructor */
     public ChallengerMode() {
+        //TODO: move name string to properties file
         this.name = "Challenger Mode";
         this.nbDigit = pr.getIntProp("settings.nbDigit");
         this.nbTries = pr.getIntProp("settings.nbTries");
@@ -49,9 +51,11 @@ public class ChallengerMode {
         this.playAgain = true;
     }
 
+    /* Class Methods */
+
     /**
      * Method to generate a random number in order to found the secret number
-     * @author: Rémy VALLET
+     * @author Rémy VALLET
      * @return String of the number to found
      */
     public String generateSecretNum () {
@@ -66,7 +70,7 @@ public class ChallengerMode {
 
     /**
      * Method to adjust the min and max Arrays with the human player answer
-     * @author: Rémy VALLET
+     * @author Rémy VALLET
      * @param userInput The string of operators '+,-,=' contained in the human player answer
      */
     public void adjustMinMax (String userInput) {
@@ -92,7 +96,7 @@ public class ChallengerMode {
     /**
      * A method to set victory if the human player answer contains only '=' operator
      *
-     * @author: Rémy VALLET
+     * @author Rémy VALLET
      * @param userInput The string of operators '+,-,=' contained in the human player answer
      */
     public void checkHumanAnswer (String userInput){
@@ -122,8 +126,7 @@ public class ChallengerMode {
             do {
                 System.out.print(pr.getContent("content.cm.msg5"));
                 humanAnswer = ScannerTools.readLine();
-            } while (!ScannerTools.isValidAnswer(humanAnswer));
-
+            } while (!ScannerTools.isValidAnswerOperatorsSign(humanAnswer));
             cmGame.checkHumanAnswer(humanAnswer);
             if (!cmGame.getNumFound()) {
                 cmGame.adjustMinMax(humanAnswer);
@@ -136,7 +139,8 @@ public class ChallengerMode {
         }
     }
 
-    /* Getter and Setter */
+    /* Getters and Setters */
+    //Todo: remove unused setters
     public String getSecretNum() {
         return secretNum;
     }

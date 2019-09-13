@@ -53,7 +53,8 @@ public class GameCommonContent {
                     playAgain = false;
                     isValidChoice=true;
                     do {
-                        System.out.println("2");
+                        new DefenderMode().run();
+                        GameCommonContent.gameEndMenu();
                     } while (playAgain);
                     break;
                 case "3":
@@ -63,8 +64,8 @@ public class GameCommonContent {
                     break;
                 default:
                     isValidChoice=false;
-                    System.out.println(" ");
-                    System.err.println(pr.getContent("content.sm.msg3.error"));
+                    System.out.println("");
+                    System.out.println(pr.getContent("content.sm.msg3.error"));
             }
         } while (!isValidChoice);
     }

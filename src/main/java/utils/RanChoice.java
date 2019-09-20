@@ -1,5 +1,8 @@
 package main.java.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Random;
 
 /**
@@ -7,7 +10,7 @@ import java.util.Random;
  * @author Rémy VALLET
  */
 public abstract class RanChoice {
-
+    private static Logger logger = LogManager.getLogger(ComputeTools.class.getName());
     /**
      * Method that takes as parameter lower and upper bounds to return a random number between these bounds
      * @author Rémy VALLET
@@ -16,7 +19,12 @@ public abstract class RanChoice {
      * @return int --> the randomly chosen number
      */
          public static int ranChoice(int min, int max) {
-            Random num = new Random();
-            return min + num.nextInt(max - min + 1);
+             if (max - min + 1 <= 0 ) {
+/*                 logger.info("RanChoice : min = "+min+" max = "+max);*/
+                 return min<max ? min : max;
+             } else {
+                 Random num = new Random();
+                 return min + num.nextInt(max - min + 1);
+             }
         }
 }

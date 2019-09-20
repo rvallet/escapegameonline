@@ -76,13 +76,24 @@ public class ChallengerMode {
     public void adjustMinMax (String userInput) {
         for (int i=0; i<userInput.length(); i++) {
             char temp = userInput.charAt(i);
-            //Todo : add logger if sign '+' or '-' out of range (arrays min/max) or secure this input
+            int tempDigit = Integer.parseInt(String.valueOf(getSecretNum().charAt(i)));
+            //Todo : add logger if sign '+' or '-' out of range (arrays min/max) and secure this input
             switch (temp) {
                 case '+':
-                    this.minArr.set(i, Integer.parseInt(String.valueOf(getSecretNum().charAt(i)))+1);
+                    if ((tempDigit+1) <= 9 && (this.minArr.get(i)+1)<=this.maxArr.get(i)) {
+                        this.minArr.set(i, tempDigit + 1);
+                    } else {
+                        System.err.println(pr.getContent("content.cm.err1.1")+tempDigit+pr.getContent("content.cm.err1.2.1")+(i+1)+pr.getContent("content.cm.err1.3"));
+                        if (tempDigit + 1 <=9) {this.maxArr.set(i, tempDigit + 1);}
+                    }
                     break;
                 case '-':
-                    this.maxArr.set(i, Integer.parseInt(String.valueOf(getSecretNum().charAt(i)))-1);
+                    if ((tempDigit-1)>= 0 && (this.maxArr.get(i)-1)>=this.minArr.get(i)) {
+                        this.maxArr.set(i, tempDigit - 1);
+                    } else {
+                        System.err.println(pr.getContent("content.cm.err1.1")+tempDigit+pr.getContent("content.cm.err1.2.2")+(i+1)+pr.getContent("content.cm.err1.3"));
+                        if (tempDigit-1>=0) {this.minArr.set(i,tempDigit-1);}
+                    }
                     break;
                 case '=':
                     this.minArr.set(i, Integer.parseInt(String.valueOf(getSecretNum().charAt(i))));
@@ -111,7 +122,7 @@ public class ChallengerMode {
     }
 
     /* RUN */
-    public void run(){
+    public void run() {
         System.out.println(pr.getContent("content.cm.msg1"));
         ChallengerMode cmGame = new ChallengerMode();
         while(!cmGame.getNumFound() && !cmGame.getReachMaxAttempts() && cmGame.getPlayAgain()) {

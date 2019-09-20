@@ -4,12 +4,14 @@ import main.java.utils.PropertiesReader;
 import main.java.utils.ScannerTools;
 import main.java.utils.TextAnimation;
 
+
 public class GameCommonContent {
     static PropertiesReader pr = new PropertiesReader();
     static Boolean playAgain = false;
 
     public static void gameIntroduction() throws InterruptedException {
-        TextAnimation.gradualText(pr.getContent("content.intro1"));
+        TextAnimation.gradualText(pr.getContent("content.intro1.1"));
+        TextAnimation.gradualText(pr.getContent("content.intro1.2")+pr.getIntProp("settings.nbDigit")+" "+pr.getContent("content.intro1.3")+pr.getIntProp("settings.nbTries")+" "+pr.getContent("content.intro1.4"));
         Thread.sleep(500);
         TextAnimation.gradualText(pr.getContent("content.intro2"));
         Thread.sleep(1000);

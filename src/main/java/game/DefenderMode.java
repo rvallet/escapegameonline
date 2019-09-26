@@ -1,9 +1,7 @@
 package main.java.game;
 
-import main.java.utils.PropertiesReader;
 import main.java.utils.RanChoice;
 import main.java.utils.ScannerTools;
-import org.apache.logging.log4j.core.util.JsonUtils;
 
 /**
  * Search for an X number combination in Defender mode :
@@ -12,36 +10,12 @@ import org.apache.logging.log4j.core.util.JsonUtils;
  * The number of tentavites is limited.
  * @author Rémy VALLET
  */
-public class DefenderMode {
-    //Todo: put commons variables in parent class and extends this one with a super() constructor
-
-    /* Game settings variable */
-    private int nbDigit; //The number of digit from properties settings
-    private int nbTries; //The limited number of tries to found number
-    private Boolean devMode; //The dev mode from properties settings (useless on this mode)
-
-    /* Class variable */
-    private String name; //The name of the game mode to display
-    private String secretNum; //the secret number that human user attempts to find
-    private int attemptsNum; //the actual number of tries
-    private Boolean numFound; //is the number is found ?
-    private Boolean reachMaxAttempts; //is the max attempts reached ?
-    private Boolean playAgain; //is the human player want to play again this mode ?
-
-    /* Tools */
-    static PropertiesReader pr = new PropertiesReader(); //instance of PropertiesReader (easiest reading type : String, Int & Boolean)
+public class DefenderMode extends EscapeGame{
 
     /* Class constructor */
     public DefenderMode() {
         //TODO: move name string to properties file
-        this.name = "Defender Mode";
-        this.nbDigit = pr.getIntProp("settings.nbDigit");
-        this.nbTries = pr.getIntProp("settings.nbTries");
-        this.devMode = pr.getBoolProp("settings.devMode");
-        this.attemptsNum =0;
-        this.numFound = false;
-        this.reachMaxAttempts = false;
-        this.playAgain = true;
+        super("Defender Mode");
         this.secretNum=generateSecretNum();
     }
 
@@ -51,7 +25,7 @@ public class DefenderMode {
      * @author Rémy VALLET
      * @return String of the number the human player have to found
      */
-    public String generateSecretNum() {
+    protected String generateSecretNum() {
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<this.nbDigit; i++){
             sb.append(RanChoice.ranChoice(0,9));
@@ -66,7 +40,7 @@ public class DefenderMode {
      * @author Rémy VALLET
      * @param userInput The user input string of the number to found
      */
-    public void checkHumanAnswer (String userInput){
+    protected void checkHumanAnswer (String userInput){
         setAttemptsNum(getAttemptsNum()+1);
         if (userInput.equals(getSecretNum())) {
             this.setNumFound(true);
@@ -80,7 +54,7 @@ public class DefenderMode {
      * @param userInput The user input string of the number to found
      * @return String of operators '+,-,=' which evaluates every digit
      */
-    public String generateAnswer(String userInput) {
+    protected String generateAnswer(String userInput) {
         StringBuilder sbResult = new StringBuilder();
         for (int i = 0; i < userInput.length(); i++) {
             int userDigit = Integer.parseInt(String.valueOf(userInput.charAt(i)));
@@ -96,9 +70,12 @@ public class DefenderMode {
         return sbResult.toString();
     }
 
+    //Todo: How to manage this empty method from super() ?
+    protected void adjustMinMax (String userInput){};
+
     /* RUN */
-    public void run() {
-        DefenderMode dmGame = new DefenderMode();
+    protected void run() {
+        EscapeGame dmGame = new DefenderMode();
         String devMode=pr.getContent("content.dev.1")+dmGame.getSecretNum()+" "+pr.getContent("content.dev.2");
         if (dmGame.getDevMode()) {System.out.println(devMode);}
         System.out.println(pr.getContent("content.dm.msg1"));
@@ -127,78 +104,4 @@ public class DefenderMode {
         }
     }
 
-    /* Getters and Setters */
-    //Todo: remove unused setters
-
-    public int getNbDigit() {
-        return nbDigit;
-    }
-
-    public void setNbDigit(int nbDigit) {
-        this.nbDigit = nbDigit;
-    }
-
-    public int getNbTries() {
-        return nbTries;
-    }
-
-    public void setNbTries(int nbTries) {
-        this.nbTries = nbTries;
-    }
-
-    public Boolean getDevMode() {
-        return devMode;
-    }
-
-    public void setDevMode(Boolean devMode) {
-        this.devMode = devMode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSecretNum() {
-        return secretNum;
-    }
-
-    public void setSecretNum(String secretNum) {
-        this.secretNum = secretNum;
-    }
-
-    public int getAttemptsNum() {
-        return attemptsNum;
-    }
-
-    public void setAttemptsNum(int attemptsNum) {
-        this.attemptsNum = attemptsNum;
-    }
-
-    public Boolean getNumFound() {
-        return numFound;
-    }
-
-    public void setNumFound(Boolean numFound) {
-        this.numFound = numFound;
-    }
-
-    public Boolean getReachMaxAttempts() {
-        return reachMaxAttempts;
-    }
-
-    public void setReachMaxAttempts(Boolean reachMaxAttempts) {
-        this.reachMaxAttempts = reachMaxAttempts;
-    }
-
-    public Boolean getPlayAgain() {
-        return playAgain;
-    }
-
-    public void setPlayAgain(Boolean playAgain) {
-        this.playAgain = playAgain;
-    }
 }

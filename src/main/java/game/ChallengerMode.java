@@ -1,10 +1,6 @@
 package main.java.game;
-import main.java.utils.PropertiesReader;
 import main.java.utils.RanChoice;
 import main.java.utils.ScannerTools;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Search for an X number combination in Challenger mode :
@@ -13,86 +9,61 @@ import java.util.List;
  * The number of tentavites is limited.
  * @author Rémy VALLET
  */
-public class ChallengerMode {
-    //Todo: put commons variables in parent class and extends this one with a super() constructor
-
-    /* Game settings variable */
-    private int nbDigit; //The number of digit from properties settings
-    private int nbTries; //The limited number of tries to found number
-    private Boolean devMode; //The dev mode from properties settings (useless on this mode)
-
-    /* Class variable */
-    private String name; //The name of the game mode to display
-    private String secretNum; //the secret number we attempts to found
-    private int attemptsNum; //the actual number of tries
-    private List<Integer> minArr=new ArrayList<>(); //the min array adjusted with the human player answer
-    private List<Integer> maxArr=new ArrayList<>(); //the max array adjusted with the human player answer
-    private Boolean numFound; //is the number is found ?
-    private Boolean reachMaxAttempts; //is the max attempts reached ?
-    private Boolean playAgain; //is the human player want to play again this mode ?
-
-    /* Tools */
-    static PropertiesReader pr = new PropertiesReader(); //instance of PropertiesReader (easiest reading type : String, Int & Boolean)
+public class ChallengerMode extends EscapeGame {
 
     /* Class constructor */
     public ChallengerMode() {
         //TODO: move name string to properties file
-        this.name = "Challenger Mode";
-        this.nbDigit = pr.getIntProp("settings.nbDigit");
-        this.nbTries = pr.getIntProp("settings.nbTries");
-        this.devMode = pr.getBoolProp("settings.devMode");
-        this.attemptsNum =0;
-        for (int i=0; i<pr.getIntProp("settings.nbDigit"); i++) {
-            this.minArr.add(0);
-            this.maxArr.add(9);
-        }
-        this.numFound = false;
-        this.reachMaxAttempts = false;
-        this.playAgain = true;
+        super("Challenger Mode");
     }
 
     /* Class Methods */
 
     /**
      * Method to generate a random number in order to found the secret number
-     * @author Rémy VALLET
+     *
      * @return String of the number to found
+     * @author Rémy VALLET
      */
-    public String generateSecretNum () {
+    public String generateSecretNum() {
         StringBuilder sb = new StringBuilder();
-        for (int i=0; i<this.nbDigit; i++){
+        for (int i = 0; i < this.nbDigit; i++) {
             sb.append(RanChoice.ranChoice(this.minArr.get(i), this.maxArr.get(i)));
         }
         setSecretNum(sb.toString());
-        setAttemptsNum(getAttemptsNum()+1);
-    return sb.toString();
+        setAttemptsNum(getAttemptsNum() + 1);
+        return sb.toString();
     }
 
     /**
      * Method to adjust the min and max Arrays with the human player answer
-     * @author Rémy VALLET
+     *
      * @param userInput The string of operators '+,-,=' contained in the human player answer
+     * @author Rémy VALLET
      */
-    public void adjustMinMax (String userInput) {
-        for (int i=0; i<userInput.length(); i++) {
+    public void adjustMinMax(String userInput) {
+        for (int i = 0; i < userInput.length(); i++) {
             char temp = userInput.charAt(i);
             int tempDigit = Integer.parseInt(String.valueOf(getSecretNum().charAt(i)));
-            //Todo : add logger if sign '+' or '-' out of range (arrays min/max) and secure this input
             switch (temp) {
                 case '+':
-                    if ((tempDigit+1) <= 9 && (this.minArr.get(i)+1)<=this.maxArr.get(i)) {
+                    if ((tempDigit + 1) <= 9 && (this.minArr.get(i) + 1) <= this.maxArr.get(i)) {
                         this.minArr.set(i, tempDigit + 1);
                     } else {
-                        System.err.println(pr.getContent("content.cm.err1.1")+tempDigit+pr.getContent("content.cm.err1.2.1")+(i+1)+pr.getContent("content.cm.err1.3"));
-                        if (tempDigit + 1 <=9) {this.maxArr.set(i, tempDigit + 1);}
+                        System.err.println(pr.getContent("content.cm.err1.1") + tempDigit + pr.getContent("content.cm.err1.2.1") + (i + 1) + pr.getContent("content.cm.err1.3"));
+                        if (tempDigit + 1 <= 9) {
+                            this.maxArr.set(i, tempDigit + 1);
+                        }
                     }
                     break;
                 case '-':
-                    if ((tempDigit-1)>= 0 && (this.maxArr.get(i)-1)>=this.minArr.get(i)) {
+                    if ((tempDigit - 1) >= 0 && (this.maxArr.get(i) - 1) >= this.minArr.get(i)) {
                         this.maxArr.set(i, tempDigit - 1);
                     } else {
-                        System.err.println(pr.getContent("content.cm.err1.1")+tempDigit+pr.getContent("content.cm.err1.2.2")+(i+1)+pr.getContent("content.cm.err1.3"));
-                        if (tempDigit-1>=0) {this.minArr.set(i,tempDigit-1);}
+                        System.err.println(pr.getContent("content.cm.err1.1") + tempDigit + pr.getContent("content.cm.err1.2.2") + (i + 1) + pr.getContent("content.cm.err1.3"));
+                        if (tempDigit - 1 >= 0) {
+                            this.minArr.set(i, tempDigit - 1);
+                        }
                     }
                     break;
                 case '=':
@@ -108,28 +79,34 @@ public class ChallengerMode {
     /**
      * A method to set victory if the human player answer contains only '=' operator
      *
-     * @author Rémy VALLET
      * @param userInput The string of operators '+,-,=' contained in the human player answer
+     * @author Rémy VALLET
      */
-    public void checkHumanAnswer (String userInput){
+    public void checkHumanAnswer(String userInput) {
         StringBuilder sbTemp = new StringBuilder();
-        for (int i=0; i<pr.getIntProp("settings.nbDigit"); i++) {
+        for (int i = 0; i < pr.getIntProp("settings.nbDigit"); i++) {
             sbTemp.append("=");
         }
         if (userInput.equals(sbTemp.toString())) {
-         this.setNumFound(true);
+            this.setNumFound(true);
         }
+    }
+
+    //Todo: How to manage this empty method from super() ?
+    @Override
+    String generateAnswer(String userInput) {
+        return null;
     }
 
     /* RUN */
     public void run() {
         System.out.println(pr.getContent("content.cm.msg1"));
-        ChallengerMode cmGame = new ChallengerMode();
-        while(!cmGame.getNumFound() && !cmGame.getReachMaxAttempts() && cmGame.getPlayAgain()) {
+        EscapeGame cmGame = new ChallengerMode();
+        while (!cmGame.getNumFound() && !cmGame.getReachMaxAttempts() && cmGame.getPlayAgain()) {
             System.out.print(pr.getContent("content.cm.msg2"));
             System.out.println(cmGame.generateSecretNum());
             System.out.println(pr.getContent("content.cm.msg3"));
-            System.out.println(pr.getContent("content.cm.msg4.1") + cmGame.getAttemptsNum() + " "+ pr.getContent("content.cm.msg4.2") + pr.getProp("settings.nbTries") + " "+pr.getContent("content.cm.msg4.3"));
+            System.out.println(pr.getContent("content.cm.msg4.1") + cmGame.getAttemptsNum() + " " + pr.getContent("content.cm.msg4.2") + pr.getProp("settings.nbTries") + " " + pr.getContent("content.cm.msg4.3"));
 
             if (cmGame.getAttemptsNum() == Integer.parseInt(pr.getProp("settings.nbTries"))) {
                 cmGame.setReachMaxAttempts(true);
@@ -146,65 +123,8 @@ public class ChallengerMode {
                     System.out.println(pr.getContent("content.cm.msg7"));
                 }
             } else {
-                System.out.println(pr.getContent("content.cm.msg6.1")+cmGame.getSecretNum()+" "+pr.getContent("content.cm.msg6.2")+cmGame.getAttemptsNum()+" "+pr.getContent("content.cm.msg6.3"));
+                System.out.println(pr.getContent("content.cm.msg6.1") + cmGame.getSecretNum() + " " + pr.getContent("content.cm.msg6.2") + cmGame.getAttemptsNum() + " " + pr.getContent("content.cm.msg6.3"));
             }
         }
-    }
-
-    /* Getters and Setters */
-    //Todo: remove unused setters
-    public String getSecretNum() {
-        return secretNum;
-    }
-
-    public void setSecretNum(String secretNum) {
-        this.secretNum = secretNum;
-    }
-
-    public int getAttemptsNum() {
-        return attemptsNum;
-    }
-
-    public void setAttemptsNum(int attemptsNum) {
-        this.attemptsNum = attemptsNum;
-    }
-
-    public List<Integer> getMinArr() {
-        return minArr;
-    }
-
-    public void setMinArr(List<Integer> minArr) {
-        this.minArr = minArr;
-    }
-
-    public List<Integer> getMaxArr() {
-        return maxArr;
-    }
-
-    public void setMaxArr(List<Integer> maxArr) {
-        this.maxArr = maxArr;
-    }
-    public Boolean getNumFound() {
-        return numFound;
-    }
-
-    public void setNumFound(Boolean numFound) {
-        this.numFound = numFound;
-    }
-
-    public Boolean getReachMaxAttempts() {
-        return reachMaxAttempts;
-    }
-
-    public void setReachMaxAttempts(Boolean reachMaxAttempts) {
-        this.reachMaxAttempts = reachMaxAttempts;
-    }
-
-    public Boolean getPlayAgain() {
-        return playAgain;
-    }
-
-    public void setPlayAgain(Boolean playAgain) {
-        this.playAgain = playAgain;
     }
 }

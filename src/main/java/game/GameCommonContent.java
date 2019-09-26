@@ -10,6 +10,7 @@ public class GameCommonContent {
     static Boolean playAgain = false;
 
     public static void gameIntroduction() throws InterruptedException {
+        TextAnimation.displayFileText(pr.getProp("settings.gameLogo"));
         TextAnimation.gradualText(pr.getContent("content.intro1.1"));
         TextAnimation.gradualText(pr.getContent("content.intro1.2")+pr.getIntProp("settings.nbDigit")+" "+pr.getContent("content.intro1.3")+pr.getIntProp("settings.nbTries")+" "+pr.getContent("content.intro1.4"));
         Thread.sleep(500);

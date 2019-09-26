@@ -24,7 +24,7 @@ abstract class EscapeGame {
     public PropertiesReader pr = new PropertiesReader(); //instance of PropertiesReader (easiest reading type : String, Int & Boolean)
 
     /* Class constructor */
-    EscapeGame(String name){
+    public EscapeGame(String name){
         this.name = name;
         this.nbDigit = pr.getIntProp("settings.nbDigit");
         this.nbTries = pr.getIntProp("settings.nbTries");

@@ -1,48 +1,61 @@
 @startuml
-/' Start Class Examples :
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-{static} size()
-{abstract} void method()
-}
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
-/End Class Examples '/
 /' Start UML Class '/
-class ChallengerMode {
--String name
--String secretNum
--int attemptsNum
--ArrayList<Integer> minArr
--ArrayList<Integer> maxArr
--Boolean numFound
--Boolean reachMaxAttempts
--Boolean playAgain
-~{static}PropertiesReader pr
--int nbDigit
--int nbTries
--int nbDigit
+package "main.java.game" #DDDDDD {
+    abstract class EscapeGame {
+        #int nbDigit
+        #int nbTries
+        #Boolean devMode
+        #String name
+        #String secretNum
+        #int attemptsNum
+        #ArrayList<Integer> minArr
+        #ArrayList<Integer> maxArr
+        #Boolean numFound
+        #Boolean reachMaxAttempts
+        #Boolean playAgain
+        +PropertiesReader pr
 
-+void ChallengerMode()
-+String generateSecretNum()
-+void adjustMinMax (String userInput)
-+void checkHumanAnswer (String userInput)
-+void run()
+        +EscapeGame(String name)
+        {abstract} String generateSecretNum()
+        {abstract} void adjustMinMax (String userInput)
+        {abstract} void checkHumanAnswer (String userInput)
+        {abstract} String generateAnswer(String userInput)
+        {abstract} void run()
+    }
+
+    class ChallengerMode {
+        +ChallengerMode()
+    }
+
+    class DefenderMode {
+        +DefenderMode()
+    }
+
+    class DuelMode {
+        +DuelMode()
+    }
+
+    class LaunchGame {
+    }
+
+    class GameCommonContent {
+    }
+
+    EscapeGame --|> ChallengerMode
+    EscapeGame --|> DefenderMode
+    EscapeGame --|> DuelMode
+    DuelMode --|> ChallengerMode
+    DuelMode --|> DefenderMode
+
+}
+package "main.java.utils" #DDDDDD {
+    class PropertiesReader {
+    }
+    class RanChoice {
+    }
+    class ScannerTools {
+    }
+    class TextAnimation {
+    }
 }
 @enduml

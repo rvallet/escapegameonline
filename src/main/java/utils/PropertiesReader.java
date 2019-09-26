@@ -11,7 +11,7 @@ public class PropertiesReader {
     private String contentLanguage;
     Properties prop = new Properties();
     Properties content = new Properties();
-    private static Logger logger = LogManager.getLogger(ComputeTools.class.getName());
+    private static Logger logger = LogManager.getLogger(PropertiesReader.class.getName());
 
     public PropertiesReader() {
         String propLanguage = getProp("settings.language").trim();

@@ -1,6 +1,5 @@
 package main.java.game;
 
-import main.java.utils.PropertiesReader;
 import main.java.utils.ScannerTools;
 
 /**
@@ -9,28 +8,35 @@ import main.java.utils.ScannerTools;
  * The first to find the secret combination of the other is the winnner!
  * @author Rémy VALLET
  */
-public class DuelMode {
-
-    /* Class variable */
-    private String name; //The name of the game mode to display
-    private Boolean playAgain; //is the human player want to play again this mode ?
-
-    /* Tools */
-    static PropertiesReader pr = new PropertiesReader(); //instance of PropertiesReader (easiest reading type : String, Int & Boolean)
+public class DuelMode extends EscapeGame{
 
     /* Class constructor */
     public DuelMode() {
         //TODO: move name string to properties file
-        this.name = "Duel Mode";
-        this.playAgain = true;
+        super("Duel Mode");
     }
+
+    //Todo: How to manage this empty method from super() ?
+    @Override
+    protected String generateSecretNum() {return null;}
+
+    //Todo: How to manage this empty method from super() ?
+    @Override
+    protected void adjustMinMax(String userInput) {}
+
+    //Todo: How to manage this empty method from super() ?
+    @Override
+    protected void checkHumanAnswer(String userInput) {}
+
+    //Todo: How to manage this empty method from super() ?
+    @Override
+    String generateAnswer(String userInput) {return null;}
 
     /* RUN */
     public void run(){
-        DefenderMode dmGame = new DefenderMode();
-        ChallengerMode cmGame = new ChallengerMode();
-        DuelMode duelGame = new DuelMode();
-        Boolean isWon = false;
+        EscapeGame dmGame = new DefenderMode();
+        EscapeGame cmGame = new ChallengerMode();
+        EscapeGame duelGame = new DuelMode();
 
         String devMode=pr.getContent("content.dev.1")+dmGame.getSecretNum()+" "+pr.getContent("content.dev.2");
         if (dmGame.getDevMode()) {System.out.println(devMode);}
@@ -50,9 +56,6 @@ public class DuelMode {
                 System.out.println(pr.getContent("content.duel.msg5") + dmGame.generateAnswer(dmHumanAnswer));
                 System.out.print(pr.getContent("content.duel.msg6"));
                 System.out.println(cmGame.generateSecretNum());
-/*            }
-        else if (!cmGame.getNumFound()){
-            System.out.println(pr.getContent("content.cm.msg7"));*/
             } else if (dmGame.getNumFound() && !cmGame.getNumFound()) {
                 System.out.println(pr.getContent("content.dm.msg7") + dmGame.getSecretNum());
             }
@@ -77,23 +80,5 @@ public class DuelMode {
             if (!cmGame.getNumFound() && !dmGame.getNumFound())
         System.out.println(pr.getContent("content.duel.msg8.1")+cmGame.getAttemptsNum()+pr.getContent("content.duel.msg8.2"));
         }
-    }
-    /* Getters and Setters */
-    //Todo: remove unused setters
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getPlayAgain() {
-        return playAgain;
-    }
-
-    public void setPlayAgain(Boolean playAgain) {
-        this.playAgain = playAgain;
     }
 }

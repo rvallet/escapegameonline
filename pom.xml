@@ -6,10 +6,16 @@
 
     <groupId>com.gameplaystudio.escape_game_online</groupId>
     <artifactId>escape-game-online</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.4.0-SNAPSHOT</version>
+
+    <!-- Forcing encoding UTF-8 and JDK 1.8 on maven build -->
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    </properties>
 
 <dependencies>
-
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -36,6 +42,5 @@
         <version>RELEASE</version>
         <scope>compile</scope>
     </dependency>
-
 </dependencies>
 </project>

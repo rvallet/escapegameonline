@@ -28,7 +28,7 @@ Duel Mode: Each player chooses his secret combination. The first to find it wins
 
 Get a copy of the project by cloning it from github on your local machine and import as Maven project for development and testing.
 
-Else, simply download files in this folder : [EscapeGameLauncher](https://github.com/rvallet/escapegameonline/blob/master/EscapeGameLancher/) 
+Else, simply download files in this folder : [EscapeGameLauncher](https://github.com/rvallet/escapegameonline/tree/master/EscapeGameLauncher) 
 
 Then, launch the .bat file on windows (on other Operating System, search how to run .jar file on it)
 

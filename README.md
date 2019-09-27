@@ -32,6 +32,37 @@ Else, simply download files in this folder : [EscapeGameLauncher](https://github
 
 Then, launch the .bat file on windows (on other Operating System, search how to run .jar file on it)
 
+### Options 
+Edit file : /main/resources/game_settings.properties
+
+##### Game Options :
+Change the values above to adjust the length of the secret number, the maximum number of attempts, or to activate the dev mode (displays the secret combination of the computer when dual and defender modes are started).
+
+Default settings :
+```
+#Number of digit : replace value with the length of the combination to find
+settings.nbDigit=4
+
+#Number of tries : replace value with the numbers of tries you want
+settings.nbTries=5
+
+#Developer mode : replace value with "true" or "false"
+settings.devMode=false
+```
+##### Language Options :
+Change the values above to adjust the language fr-FR or in-US.
+
+Note : Adding additional language support is possible by translating an existing file into a new game_content_xx-XX.properties file and adding the new case management to the PropertiesReader file.
+
+Default settings :
+```
+#Choice of Language : replace value with "fr-FR" or "en-US" (or add new value here and in constructor Utils>PropertiesReader)
+settings.language=fr-FR
+
+#Folders : Add new line with the name of new content translation files (.properties) and parameter this new case in constructor Utils>PropertiesReader
+settings.languageChoiceFR=game_content_fr-FR.properties
+settings.languageChoiceEN=game_content_en-US.properties
+```
 ### Prerequisites
 
 Any device with OS that supports the JVM.

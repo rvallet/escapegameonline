@@ -41,13 +41,13 @@ package "main.java.game" #DDDDDD {
     class GameCommonContent {
     }
 
-    EscapeGame --|> ChallengerMode
-    EscapeGame --|> DefenderMode
-    EscapeGame --|> DuelMode
-    DuelMode --|> ChallengerMode
-    DuelMode --|> DefenderMode
-
+   ChallengerMode --|> EscapeGame
+   DefenderMode  --|> EscapeGame
+   DuelMode  --|> EscapeGame
+   ChallengerMode --|> DuelMode
+   DefenderMode --|> DuelMode
 }
+
 package "main.java.utils" #DDDDDD {
     class PropertiesReader {
     }

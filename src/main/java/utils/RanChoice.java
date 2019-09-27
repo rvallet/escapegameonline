@@ -10,7 +10,7 @@ import java.util.Random;
  * @author Rémy VALLET
  */
 public abstract class RanChoice {
-    private static Logger logger = LogManager.getLogger(ComputeTools.class.getName());
+    private static Logger logger = LogManager.getLogger(RanChoice.class.getName());
     /**
      * Method that takes as parameter lower and upper bounds to return a random number between these bounds
      * @author Rémy VALLET

@@ -30,10 +30,10 @@ Get a copy of the project by cloning it from github on your local machine and im
 
 Else, simply download files in this folder : [EscapeGameLauncher](https://github.com/rvallet/escapegameonline/tree/master/EscapeGameLauncher) 
 
-Then, launch the .bat file on windows (on other Operating System, search how to run .jar file on it)
+Then, launch the .bat file on windows (read section [Prerequisites](https://github.com/rvallet/escapegameonline#prerequisites) below).
 
 ### Options 
-Edit file : /main/resources/game_settings.properties
+Edit the following file in a text editor : [/main/resources/game_settings.properties](https://github.com/rvallet/escapegameonline/blob/master/src/main/resources/game_settings.properties)
 
 ##### Game Options :
 Change the values above to adjust the length of the secret number, the maximum number of attempts, or to activate the dev mode (displays the secret combination of the computer when dual and defender modes are started).
@@ -50,7 +50,7 @@ settings.nbTries=5
 settings.devMode=false
 ```
 ##### Language Options :
-Change the values above to adjust the language fr-FR or in-US.
+Change the values above to adjust the language fr-FR or in en-US.
 
 Note : Adding additional language support is possible by translating an existing file into a new game_content_xx-XX.properties file and adding the new case management to the PropertiesReader file.
 
@@ -65,11 +65,11 @@ settings.languageChoiceEN=game_content_en-US.properties
 ```
 ### Prerequisites
 
-Any device with OS that supports the JVM.
+Any device with Operating System (OS) that supports the Java Virtual Machine (JVM) .
 ```
 Windows, Mac OS, Linux...
 ```
-
+Windows ~~> Install the [Java Runtime Environment (JRE)](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-microsoft-windows-platforms.htm#GUID-2B9D2A17-176B-4BC8-AE2D-FD884161C958)
 ## Built With
 
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/) - IDE (SDK12)

@@ -2,60 +2,99 @@
 /' Start UML Class '/
 package "main.java.game" #DDDDDD {
     abstract class EscapeGame {
-        #int nbDigit
-        #int nbTries
-        #Boolean devMode
-        #String name
-        #String secretNum
-        #int attemptsNum
-        #ArrayList<Integer> minArr
-        #ArrayList<Integer> maxArr
-        #Boolean numFound
-        #Boolean reachMaxAttempts
-        #Boolean playAgain
-        +PropertiesReader pr
+        #nbDigit: int
+        #nbTries: int
+        #devMode: Boolean
+        #name: String
+        #secretNum: String
+        #attemptsNum: int
+        #minArr: ArrayList<Integer>
+        #maxArr: ArrayList<Integer>
+        #numFound: Boolean
+        #reachMaxAttempts: Boolean
+        #playAgain: Boolean
+        +pr: PropertiesReader
 
-        +EscapeGame(String name)
-        {abstract} String generateSecretNum()
-        {abstract} void adjustMinMax (String userInput)
-        {abstract} void checkHumanAnswer (String userInput)
-        {abstract} String generateAnswer(String userInput)
-        {abstract} void run()
+        +EscapeGame(String name) : void
+        +generateSecretNum(): String
+        +adjustMinMax(userInput: String): void
+        +checkHumanAnswer(userInput: String): void
+        +generateAnswer(userInput: String): String
+        +run(): void
     }
 
     class ChallengerMode {
-        +ChallengerMode()
+        +ChallengerMode(): void
+        +generateSecretNum(): String
+        +checkHumanAnswer(userInput: String): void
+        +adjustMinMax(userInput: String): void
+        +run(): void
     }
 
     class DefenderMode {
-        +DefenderMode()
+        +DefenderMode(): void
+        +generateSecretNum(): String
+        +checkHumanAnswer (userInput: String): void
+        +generateAnswer(userInput: String): void
+        +run(): void
     }
 
     class DuelMode {
-        +DuelMode()
+        +DuelMode(): void
+        +run(): void
     }
 
     class LaunchGame {
+    +{static}main(args: String[]): void
+    +{static}start(): void
     }
 
     class GameCommonContent {
+    +{static}pr: PropertiesReader
+    +{static}playAgain: Boolean
+    +{static}gameIntroduction(): void
+    +{static}gameStartMenu(): void
+    +{static}gameEndMenu(): void
     }
 
-   ChallengerMode --|> EscapeGame
-   DefenderMode  --|> EscapeGame
-   DuelMode  --|> EscapeGame
-   ChallengerMode --|> DuelMode
-   DefenderMode --|> DuelMode
+   ChallengerMode --|> EscapeGame : extends
+   DefenderMode  --|> EscapeGame : extends
+   DuelMode  --|> EscapeGame : extends
+   ChallengerMode *-- DuelMode : use
+   DefenderMode *-- DuelMode : use
+   LaunchGame *-- GameCommonContent : use
+   LaunchGame *-- ChallengerMode : use
+   LaunchGame *-- DefenderMode : use
+   LaunchGame *-- DuelMode : use
+
 }
 
 package "main.java.utils" #DDDDDD {
     class PropertiesReader {
+     -contentLanguage: String
+     -{static}logger: Logger
+     +PropertiesReader(): void
+     +getProp(propName: String): String
+     +getIntProp(propName: String): int
+     +getBoolProp(propName: String): Boolean
+     +getContent(contentName: String): String
     }
-    class RanChoice {
+
+    abstract class RanChoice {
+    -{static}logger: Logger
+    +{static}ranChoice(min: int, max: int): int
     }
+
     class ScannerTools {
+    -{static}sc: Scanner
+    +{static}readLine(): String
+    +{static}isValidAnswerOperatorsSign(userInput: String): Boolean
+    +{static}isValidAnswerDigits(userInput: String): Boolean
     }
+
     class TextAnimation {
+    +{static}gradualText(str: String): void
+    +{static}displayFileText(relPath: String): void
     }
 }
 @enduml

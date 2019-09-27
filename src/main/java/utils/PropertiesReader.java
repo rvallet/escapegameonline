@@ -8,11 +8,15 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesReader {
+    /* Class variable */
     private String contentLanguage;
-    Properties prop = new Properties();
-    Properties content = new Properties();
     private static Logger logger = LogManager.getLogger(PropertiesReader.class.getName());
 
+    /* Tools */
+    Properties prop = new Properties();
+    Properties content = new Properties();
+
+    /* Class constructor */
     public PropertiesReader() {
         String propLanguage = getProp("settings.language").trim();
         switch(propLanguage) {
@@ -28,6 +32,7 @@ public class PropertiesReader {
         }
     }
 
+    /* Class Methods */
     public String getProp (String propName) {
         String result=null;
 

@@ -13,8 +13,7 @@ public class ChallengerMode extends EscapeGame {
 
     /* Class constructor */
     public ChallengerMode() {
-        //TODO: move name string to properties file
-        super("Challenger Mode");
+        super("content.cm.name");
     }
 
     /* Class Methods */
@@ -90,12 +89,6 @@ public class ChallengerMode extends EscapeGame {
         if (userInput.equals(sbTemp.toString())) {
             this.setNumFound(true);
         }
-    }
-
-    //Todo: How to manage this empty method from super() ?
-    @Override
-    String generateAnswer(String userInput) {
-        return null;
     }
 
     /* RUN */

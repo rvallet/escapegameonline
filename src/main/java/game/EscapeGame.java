@@ -25,7 +25,7 @@ abstract class EscapeGame {
 
     /* Class constructor */
     public EscapeGame(String name){
-        this.name = name;
+        this.setName(name);
         this.nbDigit = pr.getIntProp("settings.nbDigit");
         this.nbTries = pr.getIntProp("settings.nbTries");
         this.devMode = pr.getBoolProp("settings.devMode");
@@ -40,11 +40,11 @@ abstract class EscapeGame {
     }
 
     /* Class Methods */
-    abstract String generateSecretNum ();
-    abstract void adjustMinMax (String userInput);
-    abstract void checkHumanAnswer(String userInput);
-    abstract String generateAnswer(String userInput);
-    abstract void run();
+    public String generateSecretNum (){return null;};
+    public void adjustMinMax (String userInput){};
+    public void checkHumanAnswer(String userInput){};
+    public String generateAnswer(String userInput){return null;};
+    public void run(){};
 
     /* Getters and Setters */
     //Todo: remove unused setters
@@ -78,7 +78,7 @@ abstract class EscapeGame {
     }
 
     protected void setName(String name) {
-        this.name = name;
+        this.name = pr.getContent(name);
     }
 
     protected String getSecretNum() {

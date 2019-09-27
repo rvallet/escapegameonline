@@ -1,5 +1,6 @@
 package main.java.game;
 
+import main.java.utils.PropertiesReader;
 import main.java.utils.RanChoice;
 import main.java.utils.ScannerTools;
 
@@ -15,7 +16,7 @@ public class DefenderMode extends EscapeGame{
     /* Class constructor */
     public DefenderMode() {
         //TODO: move name string to properties file
-        super("Defender Mode");
+        super("content.dm.name");
         this.secretNum=generateSecretNum();
     }
 
@@ -25,7 +26,7 @@ public class DefenderMode extends EscapeGame{
      * @author Rémy VALLET
      * @return String of the number the human player have to found
      */
-    protected String generateSecretNum() {
+    public String generateSecretNum() {
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<this.nbDigit; i++){
             sb.append(RanChoice.ranChoice(0,9));
@@ -40,7 +41,7 @@ public class DefenderMode extends EscapeGame{
      * @author Rémy VALLET
      * @param userInput The user input string of the number to found
      */
-    protected void checkHumanAnswer (String userInput){
+    public void checkHumanAnswer (String userInput){
         setAttemptsNum(getAttemptsNum()+1);
         if (userInput.equals(getSecretNum())) {
             this.setNumFound(true);
@@ -54,7 +55,7 @@ public class DefenderMode extends EscapeGame{
      * @param userInput The user input string of the number to found
      * @return String of operators '+,-,=' which evaluates every digit
      */
-    protected String generateAnswer(String userInput) {
+    public String generateAnswer(String userInput) {
         StringBuilder sbResult = new StringBuilder();
         for (int i = 0; i < userInput.length(); i++) {
             int userDigit = Integer.parseInt(String.valueOf(userInput.charAt(i)));
@@ -70,11 +71,8 @@ public class DefenderMode extends EscapeGame{
         return sbResult.toString();
     }
 
-    //Todo: How to manage this empty method from super() ?
-    protected void adjustMinMax (String userInput){};
-
     /* RUN */
-    protected void run() {
+    public void run() {
         EscapeGame dmGame = new DefenderMode();
         String devMode=pr.getContent("content.dev.1")+dmGame.getSecretNum()+" "+pr.getContent("content.dev.2");
         if (dmGame.getDevMode()) {System.out.println(devMode);}

@@ -12,25 +12,8 @@ public class DuelMode extends EscapeGame{
 
     /* Class constructor */
     public DuelMode() {
-        //TODO: move name string to properties file
-        super("Duel Mode");
+        super("content.dual.name");
     }
-
-    //Todo: How to manage this empty method from super() ?
-    @Override
-    protected String generateSecretNum() {return null;}
-
-    //Todo: How to manage this empty method from super() ?
-    @Override
-    protected void adjustMinMax(String userInput) {}
-
-    //Todo: How to manage this empty method from super() ?
-    @Override
-    protected void checkHumanAnswer(String userInput) {}
-
-    //Todo: How to manage this empty method from super() ?
-    @Override
-    String generateAnswer(String userInput) {return null;}
 
     /* RUN */
     public void run(){

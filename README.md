@@ -32,6 +32,8 @@ Else, simply download files in this folder : [EscapeGameLauncher](https://github
 
 Then, launch the .bat file on windows (read section [Prerequisites](https://github.com/rvallet/escapegameonline#prerequisites) below).
 
+NOTE : By launching the file DEV-MODE.bat, you will force the activation of this mode (whatever the setting of the properties file).
+
 ### Options 
 Edit the following file in a text editor : [/main/resources/game_settings.properties](https://github.com/rvallet/escapegameonline/blob/master/src/main/resources/game_settings.properties)
 
@@ -49,6 +51,12 @@ settings.nbTries=5
 #Developer mode : replace value with "true" or "false"
 settings.devMode=false
 ```
+
+Another way to enable the development option is to add the 'dev' parameter when manually launching the .jar file :
+```
+java -jar escape-game-online.jar dev
+```
+
 ##### Language Options :
 Change the values above to adjust the language fr-FR or in en-US.
 

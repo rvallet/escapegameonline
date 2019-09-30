@@ -28,7 +28,7 @@ abstract class EscapeGame {
         this.setName(name);
         this.nbDigit = pr.getIntProp("settings.nbDigit");
         this.nbTries = pr.getIntProp("settings.nbTries");
-        this.devMode = pr.getBoolProp("settings.devMode");
+        setDevMode();
         this.attemptsNum =0;
         for (int i=0; i<pr.getIntProp("settings.nbDigit"); i++) {
             this.minArr.add(0);
@@ -69,8 +69,12 @@ abstract class EscapeGame {
         return devMode;
     }
 
-    protected void setDevMode(Boolean devMode) {
-        this.devMode = devMode;
+    protected void setDevMode() {
+        if (LaunchGame.mainDevMode == true) {
+            this.devMode=true;
+        } else {
+            this.devMode = pr.getBoolProp("settings.devMode");
+        }
     }
 
     protected String getName() {

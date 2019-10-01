@@ -1,6 +1,6 @@
 ### Maven ###
 target/
-/src/main/resources/META-INF
+
 ### JetBrains ###
 #idea folder
 .idea/

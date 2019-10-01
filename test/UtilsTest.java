@@ -28,7 +28,6 @@ public class UtilsTest {
     public void testRanChoice(){
         boolean result = true;
         int nbTest = 100;
-        //TODO: implement properties for mix/max
         int min = 0;
         int max = 9;
 

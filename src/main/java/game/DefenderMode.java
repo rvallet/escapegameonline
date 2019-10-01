@@ -14,7 +14,6 @@ public class DefenderMode extends EscapeGame{
 
     /* Class constructor */
     public DefenderMode() {
-        //TODO: move name string to properties file
         super("content.dm.name");
         this.secretNum=generateSecretNum();
     }

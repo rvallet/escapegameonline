@@ -6,11 +6,11 @@ The goal of this game is to guess a combination of N numbers with a maximum of a
 
 An indication is provided, after each attempt, in the form of a sequence of mathematical signs.
 
-The '+' sign indicates that the figure to be found on this position is greater.
+The '+' sign indicates that the digit to be found on this position is greater.
 
-The '-' sign that the figure to be found is smaller.
+The '-' sign that the digit to be found is smaller.
 
-The '=' sign indicates that you have the correct number on this position.
+The '=' sign indicates that you have the correct digit on this position.
 
 ```
 If the secret combination is '555' and the proposition is '950',
@@ -67,7 +67,7 @@ Default settings :
 #Choice of Language : replace value with "fr-FR" or "en-US" (or add new value here and in constructor Utils>PropertiesReader)
 settings.language=fr-FR
 
-#Folders : Add new line with the name of new content translation files (.properties) and parameter this new case in constructor Utils>PropertiesReader
+#Language support : Add new line with the name of new content translation files (.properties) and parameter this new case in constructor Utils>PropertiesReader
 settings.languageChoiceFR=game_content_fr-FR.properties
 settings.languageChoiceEN=game_content_en-US.properties
 ```

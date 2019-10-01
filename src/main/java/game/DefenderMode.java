@@ -1,6 +1,5 @@
 package main.java.game;
 
-import main.java.utils.PropertiesReader;
 import main.java.utils.RanChoice;
 import main.java.utils.ScannerTools;
 
@@ -8,7 +7,7 @@ import main.java.utils.ScannerTools;
  * Search for an X number combination in Defender mode :
  * The player plays the role of defender. It defines a combination of X number randomly
  * The IA of the computer must find the combination based on the response made by the player to each proposal.
- * The number of tentavites is limited.
+ * The number of attempts is limited.
  * @author Rémy VALLET
  */
 public class DefenderMode extends EscapeGame{
@@ -101,5 +100,4 @@ public class DefenderMode extends EscapeGame{
             }
         }
     }
-
 }

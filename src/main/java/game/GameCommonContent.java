@@ -6,8 +6,8 @@ import main.java.utils.TextAnimation;
 
 
 public class GameCommonContent {
-    static PropertiesReader pr = new PropertiesReader();
-    static Boolean playAgain = false;
+    private static PropertiesReader pr = new PropertiesReader();
+    private static Boolean playAgain = false;
 
     public static void gameIntroduction() throws InterruptedException {
         TextAnimation.displayFileText(pr.getProp("settings.gameLogo"));

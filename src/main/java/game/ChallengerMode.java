@@ -70,7 +70,7 @@ public class ChallengerMode extends EscapeGame {
                     this.maxArr.set(i, Integer.parseInt(String.valueOf(getSecretNum().charAt(i))));
                     break;
                 default:
-                    System.err.println("invalid input" + userInput);
+                    System.err.println("invalid input : " + userInput);
             }
         }
     }
